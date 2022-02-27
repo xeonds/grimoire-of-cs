@@ -1,0 +1,18 @@
+{FrameLayout,
+  layout_width="match",
+  layout_height="match",
+  {RecyclerView,
+    id="progLangList",
+    layout_width="match",
+    layout_height="wrap",
+    layout_margin="4dp",
+  },
+  {TextView,
+    id="progLangListEmpty",
+    layout_width="wrap",
+    layout_height="wrap",
+    layout_gravity="center",
+    text="暂无数据",
+    visibility=8,
+  }
+}

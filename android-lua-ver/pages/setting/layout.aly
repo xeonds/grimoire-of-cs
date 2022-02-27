@@ -1,0 +1,6 @@
+{ListView,
+  layout_width="match",
+  layout_height="match",
+  id="settingListView",
+  dividerHeight="0dp",
+}

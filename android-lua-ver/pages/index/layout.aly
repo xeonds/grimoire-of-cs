@@ -1,0 +1,23 @@
+{
+  FrameLayout,
+  id="indexLinearLayout",
+  layout_width="match",
+  layout_height="match",
+  background=activity.uiManager.getColors().windowBackground,
+  {
+    RecyclerView,
+    id="list",
+    padding="4dp",
+    layout_width="match",
+    layout_height="match",
+    verticalScrollBarEnabled=false,
+  },
+  {TextView,
+    id="istEmpty",
+    layout_width="wrap",
+    layout_height="wrap",
+    layout_gravity="center",
+    text="暂无数据",
+    visibility=8,
+  }
+}

@@ -1,0 +1,5 @@
+{LuaWebView,
+  id="webView",
+  layout_width="match",
+  layout_height="match",
+}

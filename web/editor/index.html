@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="cn">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+        <title>计算机之书</title>
+    </head>
+    
+    <body>
+        <div class="container-fluid" style="padding:0;">
+            <div id="header" class="d-flex flex-row align-items-center justify-content-center bg-light w-100" style="padding:2rem;">
+                 <h3>计算机之书 <span class="text-primary">|</span> 数据库编辑器</h3>
+
+            </div>
+            <!-- Nav tabs -->
+            <ul class="nav nav-pills justify-content-center" style="padding:1rem;">
+                <li class="nav-item"> <a class="nav-link active" data-toggle="pill" href="#home">添加</a>
+                </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="pill" href="#remove">删除</a>
+                </li>
+            </ul>
+            <div id="main" class="d-flex flex-column align-items-center tab-content" style="padding:2rem;min-height:60vh;">
+                <div class="tab-pane active" id="home" style="width:100%;max-width:768px;">
+                     <h4>添加</h4>
+
+                    <div class="alert alert-warning alert-dismissible fade show">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button> <strong>注意：</strong>开发中</div>
+                    <form action='../core.php?db_modify' method="post">
+                        <label>数据库名称</label>
+                        <select class="form-control" name="path">
+                            <template v-for="item,index in itemList">
+                                <option v-bind:value="item">{{index.split('.')[0]}}</option>
+                            </template>
+                        </select>
+                        <label>标题</label>
+                        <input type="text" class="form-control" name="title" />
+                        <label>内容</label>
+                        <textarea type="text" class="form-control" name="content"></textarea>
+                        <br />
+                        <button type='submit' class="btn btn-primary">提交</button>
+                    </form>
+                </div>
+                <div class="tab-pane" id="remove" style="width:100%;max-width:768px;">
+                     <h4>删除</h4>
+
+                    <div class="alert alert-warning alert-dismissible fade show">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button> <strong>注意：</strong>开发中</div>
+                    <form action='../core.php?remove_item' method="post">
+                        <label>数据库名称</label>
+                        <select class="form-control" name="path" v-model="selectedItem">
+                            <template v-for="item,index in itemList">
+                                <option v-bind:value="item">{{index.split('.')[0]}}</option>
+                            </template>
+                        </select>
+                        <label>项目名称</label>
+                        <select class="form-control" name="item" v-model='articleID'>
+                            <template v-for="item,index in subItemList">
+                                <option v-bind:value="index">{{item.title}}</option>
+                            </template>
+                        </select>
+                        <label>标题</label>
+                        <input type="text" class="form-control" name="title" v-model='title' />
+                        <label>内容</label>
+                        <textarea type="text" class="form-control" name="content">{{content}}</textarea>
+                        <br>
+                        <button type='submit' class="btn btn-primary">删除</button>
+                    </form>
+                </div>
+            </div>
+            <div id="footer" class="d-flex flex-column align-items-center justify-content-center bg-light" style="padding:2rem;">
+                <p><a href="#" data-toggle="modal" data-target="#about">关于</a>
+
+                </p>
+                <p>&copy; 2021-2022 <span class="text-primary">|</span> xeonds</p>
+            </div>
+        </div>
+        <div class="modal fade" id="about">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                         <h4 class="modal-title">关于</h4>
+
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>以后再写</p>
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/axios.min.js"></script>
+        <script src="assets/js/bootstrap.js"></script>
+        <script src="assets/js/vue.js"></script>
+        <script>
+        new Vue({
+            el: "#main",
+            data: {
+                itemList: [],
+                selectedItem: '',
+                subItemList: '',
+                articleID: '',
+                title: '',
+                content: ''
+            },
+            created: function () {
+                that = this;
+                that.getData()
+            },
+            watch: {
+                selectedItem: function () {
+                    that = this;
+                    axios.get('../core.php?get_sub_list=' + that.selectedItem).then(function (res) {
+                        that.subItemList = res.data.list
+                    })
+                },
+                articleID: function () {
+                    that = this;
+                    if (that.subItemList.length > 0) {
+                        that.title = that.subItemList[that.articleID].title
+                        that.content = that.subItemList[that.articleID].content
+                    } else {
+                        that.title = that.content = ''
+                    }
+                }
+            },
+            methods: {
+                getData: function () {
+                    that = this;
+                    axios.get('../core.php?get_list').then(function (res) {
+                        that.itemList = res.data.list
+                    })
+                }
+            }
+        });
+        </script>
+    </body>
+
+</html>

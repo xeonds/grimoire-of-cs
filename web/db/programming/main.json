@@ -1,0 +1,37 @@
+{
+    "config": {
+        "status": "release",
+        "version": 1
+    },
+    "db": [{
+            "group": "面向过程语言",
+            "data": [{
+                    "title": "C",
+                    "db": "c"
+                }
+            ]
+        }, {
+            "group": "面向对象语言",
+            "data": [{
+                    "title": "C++",
+                    "db": "cpp"
+                }, {
+                    "title": "Python",
+                    "db": "python"
+                }, {
+                    "title": "Java",
+                    "db": "java"
+                }, {
+                    "title": "Kotlin",
+                    "db": "kotlin"
+                }, {
+                    "title": "C#",
+                    "db": "csharp"
+                }, {
+                    "title": "PHP",
+                    "db": "php"
+                }
+            ]
+        }
+    ]
+}

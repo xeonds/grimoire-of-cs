@@ -1,0 +1,15 @@
+{
+    "config": {
+        "status": "release",
+        "version": 1
+    },
+    "db": [{
+            "group": "基础知识",
+            "data": [{
+                    "title": "内核",
+                    "db": "core"
+                }
+            ]
+        }
+    ]
+}
